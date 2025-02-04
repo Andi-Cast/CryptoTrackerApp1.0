@@ -7,6 +7,7 @@ const SIGNOUT_URL = 'http://localhost:5500/logout'
 type AuthData = {
     roles?: string[];
     accessToken?: string;
+    userId?: string
     [key: string]: any;  
 };
 
