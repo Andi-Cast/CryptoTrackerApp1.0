@@ -9,10 +9,24 @@ export default function DashBoard() {
     if (!data) return <div>Loading...</div>;
 
     return (
-        <div className='flex-col flex bg-white w-full h-full items-center text-gray-700'>
-            <h1>Portfolio Overview</h1>
-            <p>Total Market Value: ${data.portfolioMarketValue.toFixed(2)}</p>
-            <p>Total Cost Basis: ${data.portfolioCostBasis.toFixed(2)}</p>
+        <div className='flex-col flex bg-gray-950 w-full h-full items-center justify-center text-gray-700'>
+            <div className='flex flex-col w-full p-10'>
+                <h1 className="text-gray-500 text-3xl font-semibold mb-4">Portfolio Overview</h1>
+                <div className="flex w-full gap-2 justify-between">
+                    <div className="flex flex-col w-1/3 bg-gray-800 rounded-xl p-5 border border-gray-500">
+                        <p className="text-gray-500 text-xl mb-2">Total Worth</p>
+                        <p className="text-white text-3xl">${data.portfolioMarketValue.toFixed(2)}</p>
+                    </div>
+                    <div className="flex flex-col w-1/3 bg-gray-800 rounded-xl p-5 border border-gray-500">
+                        <p className="text-gray-500 text-xl mb-2">Total Cost</p>
+                        <p className="text-white text-3xl">${data.portfolioCostBasis.toFixed(2)}</p>
+                    </div>
+                    <div className="flex flex-col w-1/3 bg-gray-800 rounded-xl p-5 border border-gray-500">
+                        <p className="text-gray-500 text-xl mb-2">Unrealized Return</p>
+                        <p className="text-white text-3xl">${(data.portfolioMarketValue - data.portfolioCostBasis).toFixed(2)}</p>
+                    </div>
+                </div>
+            </div>
             <ActiveAssetList portfolio={data.portfolio}/>
         </div>
     );

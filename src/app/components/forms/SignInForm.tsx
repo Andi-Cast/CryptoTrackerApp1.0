@@ -69,7 +69,7 @@ export default function SignInForm() {
     return (
         <form 
             onSubmit={handleSubmit}
-            className="flex flex-col justify-center items-center p-10 bg-gray-800 shadow-lg shadow-gray-600 rounded-md w-1/3 my-8">
+            className="flex flex-col justify-center items-center p-10 bg-gray-800 rounded-md w-1/3 my-8">
             <div className="flex justify-center items-center text-xl text-blue-600 font-bold mb-4">
                 Transparent Coin
             </div>

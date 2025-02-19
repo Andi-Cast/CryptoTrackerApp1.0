@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import axios, { AxiosError } from "axios";
+import { useState, useEffect, useCallback } from "react";
+import { AxiosError } from "axios";
 import useAxiosPrivate from "./useAxiosPrivate";
 import { useRouter } from "next/router";
 import useAuth from "./useAuth";
@@ -36,34 +36,31 @@ const useAssetData = () => {
     const { auth } = useAuth();
     const axiosPrivate = useAxiosPrivate();
 
-    useEffect(() => {
+    const fetchData = useCallback(async () => {
         if (!auth.userId || !auth.accessToken || typeof assetId !== 'string') {
             setError('Authentication details not provided or asset ID is invalid.');
             setLoading(false);
             return;
         }
 
-        const fetchData = async () => {
-            try {
-                const response = await axiosPrivate.get(`http://localhost:5500/user/${auth.userId}/get-asset/${assetId}`, {
-                    headers: {
-                        Authorization: `Bearer ${auth.accessToken}`
-                    }
-                });
-                setAssetData(response.data);
-                setError(null);
-            } catch (error) {
-                const axiosError = error as AxiosError;
-                setError(axiosError.message || 'Failed to fetch asset data.');
-            } finally {
-                setLoading(false);
-            }
-        };
+        setLoading(true);
+        try {
+            const response = await axiosPrivate.get(`/user/${auth.userId}/get-asset/${assetId}`);
+            setAssetData(response.data);
+            setError(null);
+        } catch (error) {
+            const axiosError = error as AxiosError;
+            setError(axiosError.message || 'Failed to fetch asset data.');
+        } finally {
+            setLoading(false);
+        }
+    }, [auth.userId, auth.accessToken, assetId, axiosPrivate]);
 
+    useEffect(() => {
         fetchData();
-    }, [auth.userId, auth.accessToken, assetId]);
+    }, [fetchData]);
 
-    return { assetData, loading, error };
+    return { assetData, loading, error, refresh: fetchData };
 };
 
 export default useAssetData;

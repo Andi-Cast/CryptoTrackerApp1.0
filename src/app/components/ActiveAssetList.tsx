@@ -15,17 +15,17 @@ interface ActiveAssetListProps {
 
 export default function ActiveAssetList({ portfolio }: ActiveAssetListProps) {
     return (
-        <div className="flex flex-col w-1/2">
-            <div className="p-2 bg-gray-100 font-bold border border-gray-400">Active Assets</div>
-            <div className='grid grid-cols-4 gap-2 border border-t-0 text-gray-400 border-gray-400 p-2 bg-gray-100'>
-                <p className='flex items-center'>Name</p>
-                <p className='flex items-center justify-end'>Balance</p>
-                <p className='flex items-center justify-end'>Quantity</p>
-                <p className='flex items-center justify-end'>Profit/Loss</p>
-            </div>
-            {portfolio.map((item) => (
-                <AssetItem key={item._id} item={item} />
-            ))}
+        <div className="flex flex-col w-full p-10 pt-0 rounded-t-lg">
+                <h1 className="text-gray-500 text-3xl font-semibold mb-4">Assets</h1>
+                <div className="grid grid-cols-5 text-gray-500 bg-gray-900 py-2 text-xl rounded-t-lg">
+                    <p className="pl-4">Name</p>
+                    <p className="pl-4">Balance</p>
+                    <p className="pl-4">Quantity</p>
+                    <p className="pl-4">Profit/Loss</p>
+                </div>
+                {portfolio.map((item) => (
+                    <AssetItem key={item._id} item={item} />
+                ))}
         </div>
     );
 }
