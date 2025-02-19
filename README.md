@@ -16,6 +16,9 @@ Below are some screenshots of the application in action:
 #### Asset Page
 ![Asset Page](ScreenShotImages/AssetPage.png)
 
+#### New Transaction Page
+![New Transaction Page](ScreenShotImages/NewTransactionForm.png)
+
 ## Getting Started
 
 First, run the development server:
